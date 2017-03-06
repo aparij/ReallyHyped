@@ -17,14 +17,14 @@ class App extends Component {
       var obj = tagData[i];
       //iterate over all the tags on one date
       for (var j = 0; j < obj.tags.length; j++) {
-        let chartTagObj = tagMap[tag.tag];
         const tag = obj.tags[j];
         if(_.has(tagMap,tag.tag)){
+          let chartTagObj = tagMap[tag.tag];
           chartTagObj.x.push(obj.date);
           chartTagObj.y.push(tag.perc);
           tagMap[tag.tag] = chartTagObj;
         }else{
-          let chartTagObj = {x:[],y:[],type: 'scatter'};
+          let chartTagObj = {x:[],y:[],type: 'scatter',name: tag.tag};
           chartTagObj.x.push(obj.date);
           chartTagObj.y.push(tag.perc);
           tagMap[tag.tag] = chartTagObj;
