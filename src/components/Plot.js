@@ -3,11 +3,7 @@ import React from 'react';
 
 class Plot extends React.Component {
   componentDidMount() {
-    Plotly.newPlot('plot', [{
-      x: this.props.xData,
-      y: this.props.yData,
-      type: this.props.type
-    }], {
+    Plotly.newPlot('plot',this.props.data, {
       margin: {
         t: 0, r: 0, l: 30
       },
