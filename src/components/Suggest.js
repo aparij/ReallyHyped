@@ -1,6 +1,6 @@
 import Autosuggest from 'react-autosuggest';
 import React from 'react';
-
+import '../styles/Suggest.css'
 // Imagine you have a list of languages that you'd like to autosuggest.
 // const languages = [
 //   {
