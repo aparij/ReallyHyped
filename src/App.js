@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+
 //import logo from './logo.svg';
 import tagData from './data/data.json';
 import './App.css';
@@ -39,15 +40,21 @@ class App extends Component {
   this.setState({data,tagMap});
   }
   render() {
-    console.log(Object.keys(this.state.tagMap).map(key=> {return {text:key}}))
+
     return (
       <div className="App">
         <div className="App-header">
             <Plot
             data={this.state.data}
+            history={this.props.history}
+            location={this.props.location}
             />
         </div>
-        <Suggest tags={Object.keys(this.state.tagMap).map(key=> {return {text:key}} )}/>
+        <Suggest
+          tags={Object.keys(this.state.tagMap).map(key=> {return {text:key}} )}
+          history={this.props.history}
+          location={this.props.location}
+      />
       </div>
     );
   }

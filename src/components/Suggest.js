@@ -1,18 +1,9 @@
 import Autosuggest from 'react-autosuggest';
 import React from 'react';
-import '../styles/Suggest.css'
-// Imagine you have a list of languages that you'd like to autosuggest.
-// const languages = [
-//   {
-//     name: 'C',
-//     year: 1972
-//   },
-//   {
-//     name: 'Elm',
-//     year: 2012
-//   },
-// ];
-
+import '../styles/Suggest.css';
+import history from '../history';
+import qs from 'qs';
+import _ from 'lodash';
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = (value,suggestionsArr) => {
   console.log(value,suggestionsArr)
@@ -23,6 +14,9 @@ const getSuggestions = (value,suggestionsArr) => {
     lang.text.toLowerCase().slice(0, inputLength) === inputValue
   );
 };
+
+
+
 
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -51,11 +45,35 @@ class Suggest extends React.Component {
     };
   }
 
+  // componentWillReceiveProps(nexProps){
+  //
+  // }
+  //
   onChange = (event, { newValue }) => {
+    //console.log("Selection!!!!!", newValue)
     this.setState({
       value: newValue
     });
   };
+
+  onSuggestionSelected = (event,{ suggestion, suggestionValue,}) => {
+    console.log("onselect" , suggestion,suggestionValue)
+    console.log("location", this.props.location, this.props.history)
+
+    let oldQuery = this.props.location.search;
+    console.log("old query",oldQuery)
+    oldQuery = qs.parse(oldQuery);
+    let payload = [suggestionValue]
+    if(!_.isEmpty(oldQuery.keywords)){
+      payload = _.union([payload,oldQuery.keywords]);
+    }
+    let newQueryPayload = { "keywords": payload.join() };
+    console.log(qs.stringify(newQueryPayload));
+    let path = this.props.location.pathname;
+    this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: false }));
+    //history.push("/alex");
+
+  }
 
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
@@ -88,6 +106,7 @@ class Suggest extends React.Component {
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionSelected={this.onSuggestionSelected}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
