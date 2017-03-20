@@ -61,9 +61,9 @@ class Suggest extends React.Component {
     console.log("location", this.props.location, this.props.history)
 
     let oldQuery = this.props.location.search;
-    console.log("old query",oldQuery)
-    oldQuery = qs.parse(oldQuery);
+    oldQuery = qs.parse(oldQuery.substring(1));
     let payload = [suggestionValue]
+    console.log("old query",oldQuery.keywords)
     if(!_.isEmpty(oldQuery.keywords)){
       payload = _.union([payload,oldQuery.keywords]);
     }
