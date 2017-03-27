@@ -6,7 +6,6 @@ import qs from 'qs';
 import _ from 'lodash';
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = (value,suggestionsArr) => {
-  console.log(value,suggestionsArr)
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
@@ -57,21 +56,15 @@ class Suggest extends React.Component {
   };
 
   onSuggestionSelected = (event,{ suggestion, suggestionValue,}) => {
-    console.log("onselect" , suggestion,suggestionValue)
-    console.log("location", this.props.location, this.props.history)
-
     let oldQuery = this.props.location.search;
     oldQuery = qs.parse(oldQuery.substring(1));
     let payload = [suggestionValue]
-    console.log("old query",oldQuery.keywords)
     if(!_.isEmpty(oldQuery.keywords)){
       payload = _.union([payload,oldQuery.keywords]);
     }
     let newQueryPayload = { "keywords": payload.join() };
-    console.log(qs.stringify(newQueryPayload));
     let path = this.props.location.pathname;
-    this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: false }));
-    //history.push("/alex");
+    this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: true }));
 
   }
 
