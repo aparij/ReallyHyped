@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-
+import {deepOrange500} from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 //import logo from './logo.svg';
 import tagData from './data/data.json';
 import './App.css';
 import Plot from './components/Plot';
 import Suggest from './components/Suggest';
+import SelectionTags from './components/SelectionTags';
 import qs from 'qs';
 
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: deepOrange500,
+  },
+});
 
 class App extends Component {
   state = {
@@ -42,6 +51,7 @@ class App extends Component {
     if(!_.isEmpty(kws)){
       data = kws.split(",").map(item=>tagMap[item]);
     }
+    console.log("componentWillMount in APP.js",data)
     //let data=[tagMap['java'],tagMap['python'],tagMap['javascript'],tagMap['reactjs']]
     this.setState({data,tagMap});
   }
@@ -70,6 +80,7 @@ getKeywordsFromQS(query){
 
   render() {
     return (
+      <MuiThemeProvider muiTheme={muiTheme}>
       <div className="App">
         <div className="App-header">
             <Plot
@@ -82,8 +93,11 @@ getKeywordsFromQS(query){
           tags={Object.keys(this.state.tagMap).map(key=> {return {text:key}} )}
           history={this.props.history}
           location={this.props.location}
-      />
+        />
+        <SelectionTags tags={_.pluck(this.state.data, 'name') }/>
+
       </div>
+    </MuiThemeProvider>
     );
   }
 }

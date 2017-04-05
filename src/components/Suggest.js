@@ -65,7 +65,7 @@ class Suggest extends React.Component {
     let newQueryPayload = { "keywords": payload.join() };
     let path = this.props.location.pathname;
     this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: true }));
-
+    this.setState({value: ""});
   }
 
   // Autosuggest will call this function every time you need to update suggestions.
