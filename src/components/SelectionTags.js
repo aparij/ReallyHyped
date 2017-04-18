@@ -1,7 +1,8 @@
 import React from 'react';
 //import RaisedButton from 'material-ui/RaisedButton';
 import Chip from 'material-ui/Chip';
-
+import _ from 'lodash';
+import qs from 'qs';
 
 let propTypes = {
   location: React.PropTypes.object.isRequired,
@@ -30,40 +31,55 @@ export default class SelectionTags extends React.Component {
    }
 
    componentWillMount(){
-
+     console.log(this.props)
    }
 
    componentWillReceiveProps(nextProps){
 
    }
-   handleRequestDelete = (key) => {
-     if (key === 3) {
-       alert('Why would you want to delete React?! :)');
-       return;
-     }
 
-     this.chipData = this.state.chipData;
-     const chipToDelete = this.chipData.map((chip) => chip.key).indexOf(key);
-     this.chipData.splice(chipToDelete, 1);
-     this.setState({chipData: this.chipData});
+   handleRequestClose() {
+    console.log("request close");
+  }
+
+   handleRequestDelete = (keyword) => {
+     let oldQuery = this.props.location.search;
+     oldQuery = qs.parse(oldQuery.substring(1)).split(",");
+     //let payload = [key]
+     let payload = oldQuery.filter(item => item===keyword)
+     let newQueryPayload = { "keywords": payload.join() };
+     let path = this.props.location.pathname;
+     this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: true }));
+
+
+
+    //  this.chipData = this.state.chipData;
+    //  const chipToDelete = this.chipData.map((chip) => chip.key).indexOf(key);
+    //  this.chipData.splice(chipToDelete, 1);
+    //  this.setState({chipData: this.chipData});
    };
 
-   renderChip(data) {
+   renderChip(data,index) {
      return (
        <Chip
-         key={data.key}
-         onRequestDelete={() => this.handleRequestDelete(data.key)}
+         key={index}
+         onRequestDelete={() => this.handleRequestDelete(data)}
+          onTouchTap={this.handleRequestClose.bind(this)}
          style={this.styles.chip}
        >
-         {data.label}
+         {data}
        </Chip>
      );
    }
 
    render() {
+     if(_.isEmpty(this.props.tags)){
+       return null;
+     }
+
      return (
        <div style={this.styles.wrapper}>
-         {this.state.chipData.map(this.renderChip, this)}
+         {this.props.tags.map(this.renderChip, this)}
        </div>
      );
    }

@@ -3,7 +3,8 @@ import _ from 'lodash';
 import {deepOrange500} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
 //import logo from './logo.svg';
 import tagData from './data/data.json';
 import './App.css';
@@ -11,6 +12,12 @@ import Plot from './components/Plot';
 import Suggest from './components/Suggest';
 import SelectionTags from './components/SelectionTags';
 import qs from 'qs';
+
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -94,7 +101,11 @@ getKeywordsFromQS(query){
           history={this.props.history}
           location={this.props.location}
         />
-        <SelectionTags tags={_.pluck(this.state.data, 'name') }/>
+        <SelectionTags
+          tags={_.map(this.state.data, 'name')}
+          history={this.props.history}
+          location={this.props.location}
+        />
 
       </div>
     </MuiThemeProvider>
