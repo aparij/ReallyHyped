@@ -28,7 +28,12 @@ class Plot extends React.Component {
         t: 0, r: 0, l: 30
       },
       xaxis: {
-        gridcolor: 'transparent'
+        gridcolor: 'transparent',
+        zeroline: true,
+      },
+      yaxis:{
+        zeroline:true,
+        autorange: true
       }
     }, {
       displayModeBar: false
