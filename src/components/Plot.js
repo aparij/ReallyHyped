@@ -9,8 +9,8 @@ class Plot extends React.Component {
      }
 	   this.drawPlot();
   }
-  componentDidUpdate() {
-    if(_.isEmpty(this.props.data)){
+  componentDidUpdate(prevProps,prevState) {
+    if(_.isEmpty(this.props.data) && _.isEmpty(prevProps.data)){
       return;
     }
     this.drawPlot();
