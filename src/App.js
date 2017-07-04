@@ -89,6 +89,12 @@ getKeywordsFromQS(query){
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
       <div className="App">
+        <h1>StackOveflow Careers Tech Trends</h1>
+
+        <h3>
+        The data provided was retrieved from - <a target="_blank" href="https://stackoverflow.com/jobs"> StackOveflow Careers</a><br/>
+        Providing long term tech trends on the job market.
+        </h3>
         <div className="App-header">
             <Plot
             data={this.state.data}
@@ -106,6 +112,10 @@ getKeywordsFromQS(query){
           history={this.props.history}
           location={this.props.location}
         />
+
+        <div>Open source on <a target="_blank" href="https://github.com/aparij/ThrillIsGoneLab">Github</a> </div>
+        <div>Original data <a target="_blank" href="https://github.com/aparij/soCareers-Data">Github</a> </div>
+        <div>Scraping script source <a target="_blank" href="https://github.com/aparij/soCareersScrape">Github</a> </div>
 
       </div>
     </MuiThemeProvider>
