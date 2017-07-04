@@ -1,3 +1,3 @@
 StackOveflow Careers Tech Trends
 
-See the data on http://www.reallyhyped.com
+See the data visualized on http://www.reallyhyped.com
