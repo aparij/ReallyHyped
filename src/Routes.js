@@ -5,11 +5,12 @@ import {
   Route
 } from 'react-router-dom'
 import App from './App';
+import withTracker from './withTracker';
 
 
 const Routes = () => (
     <Router history={history}>
-        <Route exact path="/" component={App}/>
+        <Route exact path="/" component={withTracker(App)}/>
     </Router>
 )
 

@@ -26,7 +26,7 @@ export default class SelectionTags extends React.Component {
    }
 
    componentWillMount(){
-     console.log(this.props)
+
    }
 
    componentWillReceiveProps(nextProps){
