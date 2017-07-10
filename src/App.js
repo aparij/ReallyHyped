@@ -31,8 +31,8 @@ class App extends Component {
   };
 
   componentWillMount(){
-    console.log(this.props.location.search);
     let tagMap = {}
+    let allExistingTags={};//used to impute zero values when a tag is not encountered on some date
     //iterate over each date
     for(var i = 0; i < tagData.length; i++) {
       var obj = tagData[i];
@@ -50,8 +50,26 @@ class App extends Component {
           chartTagObj.y.push(tag.perc);
           tagMap[tag.tag] = chartTagObj;
         }
+        allExistingTags[tag.tag]=1;
+      }//end each tag loop
+
+      //find all the tags with zero counts and add them to chart with zero percent values
+      if(i>0){
+        Object.keys(allExistingTags).map((key, index)  => {
+            if(allExistingTags[key]===0){
+              let chartTagObj = tagMap[key];
+              chartTagObj.x.push(obj.date);
+              chartTagObj.y.push(0);
+              tagMap[key] = chartTagObj;
+            }
+          });
+
+        //reset all the tag counts before the next iteration
+        Object.keys(allExistingTags).map(function(key, index) {
+            allExistingTags[key] = 0;
+          });
       }
-    }
+    }//end of date loop
     let kws = this.getKeywordsFromQS(this.props.location.search);
     console.log(kws);
     let data = []
