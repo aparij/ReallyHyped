@@ -24,14 +24,23 @@ class Plot extends React.Component {
 
   drawPlot(){
     Plotly.newPlot('plot',this.props.data, {
+      //margin: {
+      //  t: 0, r: 0, l: 30
+      //},
+
       margin: {
-        t: 0, r: 0, l: 30
+        l: 50,
+        r: 30,
+        b: 30,
+        t: 40,
+        pad: 4
       },
       xaxis: {
         gridcolor: 'transparent',
         zeroline: true,
       },
       yaxis:{
+        title: '% of job posts',
         zeroline:true,
         autorange: true
       }

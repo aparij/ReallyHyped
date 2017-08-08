@@ -4,13 +4,13 @@ import {deepOrange500} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
-//import logo from './logo.svg';
+import Divider from 'material-ui/Divider';
 import tagData from './data/data.json';
 import './App.css';
 import Plot from './components/Plot';
 import Suggest from './components/Suggest';
 import SelectionTags from './components/SelectionTags';
+import TopChanges from './components/TopChanges';
 import qs from 'qs';
 
 
@@ -76,32 +76,28 @@ class App extends Component {
     if(!_.isEmpty(kws)){
       data = kws.split(",").map(item=>tagMap[item]);
     }
-    console.log("componentWillMount in APP.js",data)
-    //let data=[tagMap['java'],tagMap['python'],tagMap['javascript'],tagMap['reactjs']]
     this.setState({data,tagMap});
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("component will receive props",nextProps.location.search)
     let kws = this.getKeywordsFromQS(nextProps.location.search);
-    console.log(kws);
     let data = []
     if(!_.isEmpty(kws)){
       data = kws.split(",").map(item=>this.state.tagMap[item]);
     }
     this.setState({data});
 
-}
-
-getKeywordsFromQS(query){
-  if(query===""){
-    return "";
   }
 
-  const parsedQS = qs.parse(query.substring(1));
-  console.log(parsedQS);
-  return parsedQS.keywords;
-}
+  getKeywordsFromQS(query){
+    if(query===""){
+      return "";
+    }
+
+    const parsedQS = qs.parse(query.substring(1));
+    console.log(parsedQS);
+    return parsedQS.keywords;
+  }
 
   render() {
     return (
@@ -110,9 +106,13 @@ getKeywordsFromQS(query){
         <h1>StackOveflow Careers Tech Trends</h1>
 
         <h3>
-        The data provided was retrieved from - <a target="_blank" href="https://stackoverflow.com/jobs"> StackOveflow Careers</a><br/>
-        Providing long term tech trends on the job market.
+          The data provided was retrieved from - <a target="_blank" href="https://stackoverflow.com/jobs"> StackOveflow Careers</a><br/>
+          Future tech trends on the job market.
         </h3>
+        <p>
+          The data is only for the limited five tags that employers select to show the main technologies.
+          It doesn't include the endless "nice to have" list of buzz words that many job posts uncesssary add.
+         </p>
         <div className="App-header">
             <Plot
             data={this.state.data}
@@ -131,10 +131,13 @@ getKeywordsFromQS(query){
           location={this.props.location}
         />
 
-        <div>Open source on <a target="_blank" href="https://github.com/aparij/ThrillIsGoneLab">Github</a> </div>
-        <div>Original data <a target="_blank" href="https://github.com/aparij/soCareers-Data">Github</a> </div>
-        <div>Scraping script source <a target="_blank" href="https://github.com/aparij/soCareersScrape">Github</a> </div>
+        <TopChanges/>
+        <div className="footer">
 
+          <div>Open source on <a target="_blank" href="https://github.com/aparij/ThrillIsGoneLab">Github</a> </div>
+          <div>Original data <a target="_blank" href="https://github.com/aparij/soCareers-Data">Github</a> </div>
+          <div>Scraping script source <a target="_blank" href="https://github.com/aparij/soCareersScrape">Github</a> </div>
+        </div>
       </div>
     </MuiThemeProvider>
     );

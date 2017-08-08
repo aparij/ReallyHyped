@@ -24,3 +24,22 @@
   to { transform: rotate(360deg); }
 }
 */
+
+.footer{
+ font-size:small;
+ background-color: #E1F5FE;
+ padding: 30px;
+}
+.changes{
+ margin-top: 20px;
+}
+.changes-tables-container{
+  display: flex;
+  flex-flow: row;
+}
+
+.changes-table {
+  margin: 10px;
+  margin-bottom: 20px;
+  border: solid 1px #B3E5FC;
+}

@@ -44,12 +44,7 @@ class Suggest extends React.Component {
     };
   }
 
-  // componentWillReceiveProps(nexProps){
-  //
-  // }
-  //
   onChange = (event, { newValue }) => {
-    //console.log("Selection!!!!!", newValue)
     this.setState({
       value: newValue
     });
@@ -88,7 +83,7 @@ class Suggest extends React.Component {
 
     // Autosuggest will pass through all these props to the input element.
     const inputProps = {
-      placeholder: 'Type a programming language',
+      placeholder: 'Start typing a technology name',
       value,
       onChange: this.onChange
     };
