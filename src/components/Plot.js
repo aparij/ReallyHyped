@@ -24,15 +24,13 @@ class Plot extends React.Component {
 
   drawPlot(){
     Plotly.newPlot('plot',this.props.data, {
-      //margin: {
-      //  t: 0, r: 0, l: 30
-      //},
-
+      width: 700,
+      height: 500,
       margin: {
         l: 50,
         r: 30,
         b: 30,
-        t: 40,
+        t: 0,
         pad: 4
       },
       xaxis: {

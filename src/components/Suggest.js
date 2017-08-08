@@ -1,7 +1,6 @@
 import Autosuggest from 'react-autosuggest';
 import React from 'react';
 import '../styles/Suggest.css';
-import history from '../history';
 import qs from 'qs';
 import _ from 'lodash';
 // Teach Autosuggest how to calculate suggestions for any given input value.

@@ -4,10 +4,11 @@ import {deepOrange500} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import Divider from 'material-ui/Divider';
 import tagData from './data/data.json';
 import './App.css';
 import Plot from './components/Plot';
+
+import RankingsTable from './components/RankingsTable';
 import Suggest from './components/Suggest';
 import SelectionTags from './components/SelectionTags';
 import TopChanges from './components/TopChanges';
@@ -71,7 +72,6 @@ class App extends Component {
       }
     }//end of date loop
     let kws = this.getKeywordsFromQS(this.props.location.search);
-    console.log(kws);
     let data = []
     if(!_.isEmpty(kws)){
       data = kws.split(",").map(item=>tagMap[item]);
@@ -107,18 +107,28 @@ class App extends Component {
 
         <h3>
           The data provided was retrieved from - <a target="_blank" href="https://stackoverflow.com/jobs"> StackOveflow Careers</a><br/>
-          Future tech trends on the job market.
+          Tech trends on the job market.
         </h3>
         <p>
           The data is only for the limited five tags that employers select to show the main technologies.
           It doesn't include the endless "nice to have" list of buzz words that many job posts uncesssary add.
          </p>
         <div className="App-header">
-            <Plot
-            data={this.state.data}
-            history={this.props.history}
-            location={this.props.location}
-            />
+            <div className="top-plot-container">
+
+              <RankingsTable
+                tags={tagData[tagData.length-1].tags.slice(0,21)}
+                history={this.props.history}
+                location={this.props.location}
+              />
+
+              <Plot
+              data={this.state.data}
+              history={this.props.history}
+              location={this.props.location}
+              />
+
+            </div>
         </div>
         <Suggest
           tags={Object.keys(this.state.tagMap).map(key=> {return {text:key}} )}
@@ -131,7 +141,10 @@ class App extends Component {
           location={this.props.location}
         />
 
-        <TopChanges/>
+        <TopChanges
+           history={this.props.history}
+           location={this.props.location}
+        />
         <div className="footer">
 
           <div>Open source on <a target="_blank" href="https://github.com/aparij/ThrillIsGoneLab">Github</a> </div>
