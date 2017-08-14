@@ -115,31 +115,32 @@ class App extends Component {
          </p>
         <div className="App-header">
             <div className="top-plot-container">
+                <RankingsTable
+                  tags={tagData[tagData.length-1].tags.slice(0,21)}
+                  history={this.props.history}
+                  location={this.props.location}
+                />
+             <div className="top-left-container">
+                <Suggest
+                  tags={Object.keys(this.state.tagMap).map(key=> {return {text:key}} )}
+                  history={this.props.history}
+                  location={this.props.location}
+                />
+                <SelectionTags
+                  tags={_.map(this.state.data, 'name')}
+                  history={this.props.history}
+                  location={this.props.location}
+                />
 
-              <RankingsTable
-                tags={tagData[tagData.length-1].tags.slice(0,21)}
+
+                <Plot
+                data={this.state.data}
                 history={this.props.history}
                 location={this.props.location}
-              />
-
-              <Plot
-              data={this.state.data}
-              history={this.props.history}
-              location={this.props.location}
-              />
-
+                />
+             </div>
             </div>
         </div>
-        <Suggest
-          tags={Object.keys(this.state.tagMap).map(key=> {return {text:key}} )}
-          history={this.props.history}
-          location={this.props.location}
-        />
-        <SelectionTags
-          tags={_.map(this.state.data, 'name')}
-          history={this.props.history}
-          location={this.props.location}
-        />
 
         <TopChanges
            history={this.props.history}

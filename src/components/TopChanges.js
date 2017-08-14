@@ -71,15 +71,15 @@ class TopChanges  extends React.Component {
   renderTableHeader(type){
     return (
       <TableHeader displaySelectAll ={false}>
-        <TableRow>
+        <TableRow className="table-row">
           <TableHeaderColumn colSpan="3"  style={{textAlign: 'center'}}>
             {type} PERFORMERS
           </TableHeaderColumn>
         </TableRow>
         <TableRow>
-          <TableHeaderColumn>Tech</TableHeaderColumn>
-          <TableHeaderColumn>Y/Y Change</TableHeaderColumn>
-          <TableHeaderColumn>Rank</TableHeaderColumn>
+          <TableHeaderColumn className="table-column">Tech</TableHeaderColumn>
+          <TableHeaderColumn className="table-column">Y/Y Change</TableHeaderColumn>
+          <TableHeaderColumn className="table-column">Rank</TableHeaderColumn>
         </TableRow>
       </TableHeader>
     )
@@ -87,10 +87,10 @@ class TopChanges  extends React.Component {
 
   renderRows(type){
     let rows = changesData[this.state.btnSelection][type].map(v=>
-      <TableRow key={"row-"+v.tag}>
-        <TableRowColumn key={v.tag}>{v.tag}</TableRowColumn>
-        <TableRowColumn key={v.tag}> {v.change} %</TableRowColumn>
-        <TableRowColumn key={v.tag}>{v.rank}</TableRowColumn>
+      <TableRow key={"row-"+v.tag} className="table-row table-pointer">
+        <TableRowColumn key={v.tag} className="table-column table-pointer">{v.tag}</TableRowColumn>
+        <TableRowColumn key={v.tag} className="table-column table-pointer"> {v.change} %</TableRowColumn>
+        <TableRowColumn key={v.tag} className="table-column table-pointer">{v.rank}</TableRowColumn>
       </TableRow>
     )
     return (rows);
@@ -104,7 +104,6 @@ class TopChanges  extends React.Component {
   };
 
   clickHandler = (value) => {
-    console.log(value);
     this.setState({
       btnSelection: value
     });

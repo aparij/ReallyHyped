@@ -10,10 +10,6 @@
     height: 50%;
 }
 
-.top-plot-container{
-    display: flex;
-    flex-flow: row;
-}
 .changes{
  margin-top: 20px;
 }
@@ -21,16 +17,39 @@
   display: flex;
   flex-flow: row;
 }
-
 .changes-table {
   margin: 10px;
   margin-bottom: 20px;
   border: solid 1px #B3E5FC;
 }
-
+.suggest-input-row{
+  display: flex;
+  flex-flow: row;
+}
 /*overriding material UI styles*/
 .table-row{
+    height: 25px !important;
+    padding: 5px !important;
+    text-align: center !important;
+}
+
+.table-pointer{
+    cursor: pointer;
+}
+.table-column{
     height: 20px !important;
-    padding: 3px !important;
-    //background-color: pink !important;
+    padding: 5px !important;
+    text-align: center !important;
+}
+.table-column__rank{
+     width: 10 !important;
+}
+
+.top-plot-container{
+    display: flex;
+    flex-flow: row;
+}
+
+.top-left-container{
+    flex-flow: column;
 }

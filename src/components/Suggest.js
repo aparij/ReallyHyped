@@ -3,6 +3,13 @@ import React from 'react';
 import '../styles/Suggest.css';
 import qs from 'qs';
 import _ from 'lodash';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  margin: 12,
+};
+
+
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = (value,suggestionsArr) => {
   const inputValue = value.trim().toLowerCase();
@@ -89,16 +96,25 @@ class Suggest extends React.Component {
 
     // Finally, render it!
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        onSuggestionSelected={this.onSuggestionSelected}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
+      <div className="suggest-input-row">
+
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          onSuggestionSelected={this.onSuggestionSelected}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+        />
+        <RaisedButton style={style} label="Clear" primary={true} onClick={() => this.clickHandlerBtn()} />
+      </div>
     );
   }
+  clickHandlerBtn = () => {
+    this.props.history.push("?");
+  };
+
+
 }
 export default Suggest;

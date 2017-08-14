@@ -45,10 +45,10 @@ class RankingsTable  extends React.Component {
   renderTableHeader(){
     return (
       <TableHeader displaySelectAll ={false}>
-        <TableRow>
-          <TableHeaderColumn>RANK</TableHeaderColumn>
-          <TableHeaderColumn>TECH</TableHeaderColumn>
-          <TableHeaderColumn>% OF POSTINGS</TableHeaderColumn>
+        <TableRow className="table-row">
+          <TableHeaderColumn className="table-column table-column__rank">RANK</TableHeaderColumn>
+          <TableHeaderColumn className="table-column" >TECH</TableHeaderColumn>
+          <TableHeaderColumn className="table-column">% OF POSTINGS</TableHeaderColumn>
 
         </TableRow>
       </TableHeader>
@@ -58,9 +58,9 @@ class RankingsTable  extends React.Component {
   renderRows(){
     let rows = this.props.tags.map(v=>
       <TableRow key={"row-"+v.rank} className="table-row">
-        <TableRowColumn key={v.tag}>{v.rank}</TableRowColumn>
-        <TableRowColumn key={v.tag}>{v.tag}</TableRowColumn>
-        <TableRowColumn key={v.tag}> {v.perc} %</TableRowColumn>
+        <TableRowColumn className="table-column table-column__rank table-pointer" key={v.tag}>{v.rank}</TableRowColumn>
+        <TableRowColumn className="table-column table-pointer" key={v.tag}>{v.tag}</TableRowColumn>
+        <TableRowColumn className="table-column table-pointer" key={v.tag}> {v.perc} %</TableRowColumn>
       </TableRow>
     )
     return (rows);
