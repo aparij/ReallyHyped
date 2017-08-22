@@ -25,17 +25,6 @@ export default class SelectionTags extends React.Component {
      };
    }
 
-   componentWillMount(){
-
-   }
-
-   componentWillReceiveProps(nextProps){
-
-   }
-
-   handleRequestClose() {
-  }
-
    handleRequestDelete(keyword){
      let oldQuery = this.props.location.search;
      oldQuery = qs.parse(oldQuery.substring(1));
@@ -50,11 +39,9 @@ export default class SelectionTags extends React.Component {
        <Chip
          key={index}
          onRequestDelete={()=>this.handleRequestDelete(data)}
-         onTouchTap={this.handleRequestClose.bind(this)}
          style={this.styles.chip}
-       >
-         {data}
-       </Chip>
+         label = {data}
+       />
      );
    }
 

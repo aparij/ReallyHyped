@@ -2,6 +2,7 @@ import React from 'react';
 
 import qs from 'qs';
 import _ from 'lodash';
+/*
 import {
   Table,
   TableBody,
@@ -10,6 +11,9 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+*/
+
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 class RankingsTable  extends React.Component {
    state = {
@@ -30,9 +34,9 @@ class RankingsTable  extends React.Component {
         <div className="rankings-tables-container">
           <div className="changes-table">
 
-          <Table onRowSelection={(v)=>this.rowSelected(v)}>
+          <Table >
             {this.renderTableHeader()}
-           <TableBody displayRowCheckbox={false} stripedRows={false}>
+           <TableBody>
               {this.renderRows()}
             </TableBody>
           </Table>
@@ -44,31 +48,31 @@ class RankingsTable  extends React.Component {
 
   renderTableHeader(){
     return (
-      <TableHeader displaySelectAll ={false}>
+      <TableHead>
         <TableRow className="table-row">
-          <TableHeaderColumn className="table-column table-column__rank">RANK</TableHeaderColumn>
-          <TableHeaderColumn className="table-column" >TECH</TableHeaderColumn>
-          <TableHeaderColumn className="table-column">% OF POSTINGS</TableHeaderColumn>
+          <TableCell className="table-column table-column__rank">RANK</TableCell>
+          <TableCell className="table-column" >TECH</TableCell>
+          <TableCell className="table-column">% OF POSTINGS</TableCell>
 
         </TableRow>
-      </TableHeader>
+      </TableHead>
     )
   }
 
   renderRows(){
-    let rows = this.props.tags.map(v=>
-      <TableRow key={"row-"+v.rank} className="table-row">
-        <TableRowColumn className="table-column table-column__rank table-pointer" key={v.tag}>{v.rank}</TableRowColumn>
-        <TableRowColumn className="table-column table-pointer" key={v.tag}>{v.tag}</TableRowColumn>
-        <TableRowColumn className="table-column table-pointer" key={v.tag}> {v.perc} %</TableRowColumn>
+    let rows = this.props.tags.map((v,index)=>
+      <TableRow onClick={(event)=>this.rowSelected(index)} key={"row-"+v.rank} className="table-row">
+        <TableCell className="table-column table-column__rank table-pointer" key={"cell-rank-"+v.rank}>{v.rank}</TableCell>
+        <TableCell className="table-column table-pointer" key={"cell-tag-"+v.tag}>{v.tag}</TableCell>
+        <TableCell className="table-column table-pointer" key={"cell-perc-"+index}> {v.perc} %</TableCell>
       </TableRow>
     )
     return (rows);
   }
 
   rowSelected = (rowIndex) => {
-    if(!_.isEmpty(rowIndex)){
-      this.applyQuery(this.props.tags[rowIndex[0]].tag);
+    if(!_.isUndefined(rowIndex)){
+      this.applyQuery(this.props.tags[rowIndex].tag);
     }
   };
 

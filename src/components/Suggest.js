@@ -3,7 +3,7 @@ import React from 'react';
 import '../styles/Suggest.css';
 import qs from 'qs';
 import _ from 'lodash';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 
 const style = {
   margin: 12,
@@ -107,7 +107,7 @@ class Suggest extends React.Component {
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
         />
-        <RaisedButton style={style} label="Clear" primary={true} onClick={() => this.clickHandlerBtn()} />
+        <Button raised style={style} color="primary" onClick={() => this.clickHandlerBtn()} >Clear</Button>
       </div>
     );
   }

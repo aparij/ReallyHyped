@@ -2,15 +2,8 @@ import React from 'react';
 
 import qs from 'qs';
 import _ from 'lodash';
-import RaisedButton from 'material-ui/RaisedButton';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+import Button from 'material-ui/Button';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 import changesData from '../data/top_changes.json';
 
@@ -37,15 +30,15 @@ class TopChanges  extends React.Component {
     return (
       <div className="changes">
           What tech is rising or falling fastest from:
-        <RaisedButton  key="top25" label="Top 25" primary={true} style={style} onClick={() => this.clickHandler("top25")}/>
-        <RaisedButton  key="top50" label="Top 50" primary={true} style={style} onClick={() => this.clickHandler("top50")}/>
-        <RaisedButton  key="topALL" label="All" primary={true} style={style} onClick={() => this.clickHandler("topALL")}/>
+        <Button raised key="top25" color="primary" style={style} onClick={() => this.clickHandler("top25")}>Top 25</Button>
+        <Button raised key="top50"  color="primary" style={style} onClick={() => this.clickHandler("top50")}>Top 50</Button>
+        <Button raised key="topALL" color="primary" style={style} onClick={() => this.clickHandler("topALL")}>All </Button>
         <div className="changes-tables-container">
           <div className="changes-table">
 
-          <Table onRowSelection={(v)=>this.rowSelected(v,"best")}>
+          <Table >
             {this.renderTableHeader("BEST")}
-           <TableBody displayRowCheckbox={false} stripedRows={false}>
+           <TableBody>
               {this.renderRows("best")}
             </TableBody>
           </Table>
@@ -54,9 +47,9 @@ class TopChanges  extends React.Component {
           <div className="changes-table">
 
 
-           <Table onRowSelection={(v)=>this.rowSelected(v,"worst")}>
+           <Table >
              {this.renderTableHeader("WORST")}
-              <TableBody displayRowCheckbox={false} stripedRows={false}>
+              <TableBody>
                 {this.renderRows("worst")}
               </TableBody>
             </Table>
@@ -70,36 +63,35 @@ class TopChanges  extends React.Component {
 
   renderTableHeader(type){
     return (
-      <TableHeader displaySelectAll ={false}>
+      <TableHead >
         <TableRow className="table-row">
-          <TableHeaderColumn colSpan="3"  style={{textAlign: 'center'}}>
+          <TableCell colSpan="3"  style={{textAlign: 'center'}}>
             {type} PERFORMERS
-          </TableHeaderColumn>
+          </TableCell>
         </TableRow>
         <TableRow>
-          <TableHeaderColumn className="table-column">Tech</TableHeaderColumn>
-          <TableHeaderColumn className="table-column">Y/Y Change</TableHeaderColumn>
-          <TableHeaderColumn className="table-column">Rank</TableHeaderColumn>
+          <TableCell className="table-column">Tech</TableCell>
+          <TableCell className="table-column">Y/Y Change</TableCell>
+          <TableCell className="table-column">Rank</TableCell>
         </TableRow>
-      </TableHeader>
+      </TableHead>
     )
   }
 
   renderRows(type){
-    let rows = changesData[this.state.btnSelection][type].map(v=>
-      <TableRow key={"row-"+v.tag} className="table-row table-pointer">
-        <TableRowColumn key={v.tag} className="table-column table-pointer">{v.tag}</TableRowColumn>
-        <TableRowColumn key={v.tag} className="table-column table-pointer"> {v.change} %</TableRowColumn>
-        <TableRowColumn key={v.tag} className="table-column table-pointer">{v.rank}</TableRowColumn>
+    let rows = changesData[this.state.btnSelection][type].map((v,index)=>
+      <TableRow onClick={(event)=>this.rowSelected(index,type)} key={"row-"+v.tag} className="table-row table-pointer">
+        <TableCell key={"cell-tag-"+v.tag} className="table-column table-pointer">{v.tag}</TableCell>
+        <TableCell key={"cell-change-"+index} className="table-column table-pointer"> {v.change} %</TableCell>
+        <TableCell key={"cell-rank-"+v.rank} className="table-column table-pointer">{v.rank}</TableCell>
       </TableRow>
     )
     return (rows);
   }
 
-  rowSelected = (rowIndex,type) => {
-    console.log(changesData[this.state.btnSelection][type][rowIndex[0]]);
-    if(!_.isEmpty(rowIndex)){
-      this.applyQuery(changesData[this.state.btnSelection][type][rowIndex[0]].tag);
+  rowSelected(index,type){
+    if(!_.isUndefined(index)){
+      this.applyQuery(changesData[this.state.btnSelection][type][index].tag);
     }
   };
 

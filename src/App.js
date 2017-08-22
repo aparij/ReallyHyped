@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import {deepOrange500} from 'material-ui/styles/colors';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import tagData from './data/data.json';
 import './App.css';
@@ -14,17 +11,6 @@ import SelectionTags from './components/SelectionTags';
 import TopChanges from './components/TopChanges';
 import qs from 'qs';
 
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
-
-
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500,
-  },
-});
 
 class App extends Component {
   state = {
@@ -101,7 +87,6 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
       <div className="App">
         <h1>StackOveflow Careers Tech Trends</h1>
 
@@ -116,7 +101,7 @@ class App extends Component {
         <div className="App-header">
             <div className="top-plot-container">
                 <RankingsTable
-                  tags={tagData[tagData.length-1].tags.slice(0,21)}
+                  tags={tagData[tagData.length-1].tags.slice(0,20)}
                   history={this.props.history}
                   location={this.props.location}
                 />
@@ -153,7 +138,6 @@ class App extends Component {
           <div>Scraping script source <a target="_blank" href="https://github.com/aparij/soCareersScrape">Github</a> </div>
         </div>
       </div>
-    </MuiThemeProvider>
     );
   }
 }
