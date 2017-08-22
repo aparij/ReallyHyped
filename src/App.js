@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import Grid from 'material-ui/Grid';
+
 import tagData from './data/data.json';
 import './App.css';
 import Plot from './components/Plot';
@@ -81,7 +82,6 @@ class App extends Component {
     }
 
     const parsedQS = qs.parse(query.substring(1));
-    console.log(parsedQS);
     return parsedQS.keywords;
   }
 
@@ -99,34 +99,35 @@ class App extends Component {
           It doesn't include the endless "nice to have" list of buzz words that many job posts uncesssary add.
          </p>
         <div className="App-header">
-            <div className="top-plot-container">
-                <RankingsTable
-                  tags={tagData[tagData.length-1].tags.slice(0,20)}
-                  history={this.props.history}
-                  location={this.props.location}
-                />
-             <div className="top-left-container">
-                <Suggest
-                  tags={Object.keys(this.state.tagMap).map(key=> {return {text:key}} )}
-                  history={this.props.history}
-                  location={this.props.location}
-                />
-                <SelectionTags
-                  tags={_.map(this.state.data, 'name')}
-                  history={this.props.history}
-                  location={this.props.location}
-                />
-
-
-                <Plot
-                data={this.state.data}
-                history={this.props.history}
-                location={this.props.location}
-                />
-             </div>
-            </div>
-        </div>
-
+              <Grid container spacing={24}  >
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                    <RankingsTable
+                      tags={tagData[tagData.length-1].tags.slice(0,20)}
+                      history={this.props.history}
+                      location={this.props.location}
+                    />
+                 </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                  <div className="top-left-container">
+                    <Suggest
+                      tags={Object.keys(this.state.tagMap).map(key=> {return {text:key}} )}
+                      history={this.props.history}
+                      location={this.props.location}
+                    />
+                    <SelectionTags
+                      tags={_.map(this.state.data, 'name')}
+                      history={this.props.history}
+                      location={this.props.location}
+                    />
+                    <Plot
+                    data={this.state.data}
+                    history={this.props.history}
+                    location={this.props.location}
+                    />
+                  </div>
+                </Grid>
+              </Grid>
+          </div>
         <TopChanges
            history={this.props.history}
            location={this.props.location}

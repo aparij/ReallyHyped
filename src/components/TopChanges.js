@@ -4,6 +4,7 @@ import qs from 'qs';
 import _ from 'lodash';
 import Button from 'material-ui/Button';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Grid from 'material-ui/Grid';
 
 import changesData from '../data/top_changes.json';
 
@@ -17,46 +18,45 @@ class TopChanges  extends React.Component {
   };
 
  componentWillMount() {
-   let changesMap = {}
    //iterate over each date
-   console.log(changesData.top25.best);
    for (var i = 0; i < changesData.length; i++) {
      var obj = changesData[i];
-     console.log(obj);
    }
  }
 
   render(){
     return (
       <div className="changes">
-          What tech is rising or falling fastest from:
-        <Button raised key="top25" color="primary" style={style} onClick={() => this.clickHandler("top25")}>Top 25</Button>
-        <Button raised key="top50"  color="primary" style={style} onClick={() => this.clickHandler("top50")}>Top 50</Button>
-        <Button raised key="topALL" color="primary" style={style} onClick={() => this.clickHandler("topALL")}>All </Button>
+        <div className="buttons-container">
+          <div>
+            What tech is rising or falling fastest
+          </div>
+          <div>
+            <Button raised key="top25" color="primary" style={style} onClick={() => this.clickHandler("top25")}>Top 25</Button>
+            <Button raised key="top50"  color="primary" style={style} onClick={() => this.clickHandler("top50")}>Top 50</Button>
+            <Button raised key="topALL" color="primary" style={style} onClick={() => this.clickHandler("topALL")}>All </Button>
+          </div>
+        </div>
         <div className="changes-tables-container">
-          <div className="changes-table">
-
-          <Table >
-            {this.renderTableHeader("BEST")}
-           <TableBody>
-              {this.renderRows("best")}
-            </TableBody>
-          </Table>
-          </div>
-
-          <div className="changes-table">
-
-
-           <Table >
-             {this.renderTableHeader("WORST")}
-              <TableBody>
-                {this.renderRows("worst")}
-              </TableBody>
-            </Table>
-            </div>
-
-          </div>
-
+              <Grid container spacing={24}>
+                 <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <Table >
+                      {this.renderTableHeader("BEST")}
+                     <TableBody>
+                        {this.renderRows("best")}
+                        </TableBody>
+                    </Table>
+                </Grid>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                   <Table >
+                     {this.renderTableHeader("WORST")}
+                      <TableBody>
+                        {this.renderRows("worst")}
+                      </TableBody>
+                    </Table>
+                </Grid>
+            </Grid>
+        </div>
       </div>
     )
   }

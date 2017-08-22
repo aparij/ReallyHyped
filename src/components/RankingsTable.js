@@ -2,31 +2,12 @@ import React from 'react';
 
 import qs from 'qs';
 import _ from 'lodash';
-/*
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
-*/
-
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+
 
 class RankingsTable  extends React.Component {
    state = {
   };
-
- componentWillMount() {
-   let changesMap = {}
-   console.log(this.props.tags);
-   //iterate over each date
-/*   for (var i = 0; i < changesData.length; i++) {
-     var obj = changesData[i];
-   }*/
- }
 
   render(){
     return (
