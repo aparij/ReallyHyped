@@ -88,7 +88,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>StackOveflow Careers Tech Trends</h1>
+        <h1>StackOverflow Careers Tech Trends</h1>
 
         <h3>
           The data provided was retrieved from - <a target="_blank" href="https://stackoverflow.com/jobs"> StackOveflow Careers</a><br/>
