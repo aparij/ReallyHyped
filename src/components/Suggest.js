@@ -4,6 +4,7 @@ import '../styles/Suggest.css';
 import qs from 'qs';
 import _ from 'lodash';
 import Button from 'material-ui/Button';
+import GoogleAnalytics from 'react-ga';
 
 const style = {
   margin: 12,
@@ -67,6 +68,12 @@ class Suggest extends React.Component {
     let path = this.props.location.pathname;
     this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: true }));
     this.setState({value: ""});
+    GoogleAnalytics.event({
+      category: 'Navigation',
+      action: 'Selected Suggestion',
+      label: suggestionValue
+    });
+
   }
 
   // Autosuggest will call this function every time you need to update suggestions.

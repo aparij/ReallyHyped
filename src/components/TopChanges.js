@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Button from 'material-ui/Button';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Grid from 'material-ui/Grid';
-
+import GoogleAnalytics from 'react-ga';
 import changesData from '../data/top_changes.json';
 
 const style = {
@@ -71,8 +71,8 @@ class TopChanges  extends React.Component {
         </TableRow>
         <TableRow>
           <TableCell className="table-column">Tech</TableCell>
-          <TableCell className="table-column">Y/Y Change</TableCell>
-          <TableCell className="table-column">Rank</TableCell>
+          <TableCell className="table-column">Y/Y % Change</TableCell>
+          <TableCell className="table-column">Rank (Rank Change)</TableCell>
         </TableRow>
       </TableHead>
     )
@@ -83,7 +83,7 @@ class TopChanges  extends React.Component {
       <TableRow onClick={(event)=>this.rowSelected(index,type)} key={"row-"+v.tag} className="table-row table-pointer">
         <TableCell key={"cell-tag-"+v.tag} className="table-column table-pointer">{v.tag}</TableCell>
         <TableCell key={"cell-change-"+index} className="table-column table-pointer"> {v.change} %</TableCell>
-        <TableCell key={"cell-rank-"+v.rank} className="table-column table-pointer">{v.rank}</TableCell>
+        <TableCell key={"cell-rank-"+v.rank} className="table-column table-pointer">{v.rank} ({v.rank_change>0?"+"+v.rank_change:v.rank_change})</TableCell>
       </TableRow>
     )
     return (rows);
@@ -99,6 +99,12 @@ class TopChanges  extends React.Component {
     this.setState({
       btnSelection: value
     });
+
+    GoogleAnalytics.event({
+      category: 'Navigation',
+      action: 'Clicked Top Changes Button',
+      label: value
+    });
   };
 
   applyQuery = (selection) =>{
@@ -111,6 +117,12 @@ class TopChanges  extends React.Component {
     let newQueryPayload = { "keywords": payload.join() };
     this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: true }));
     this.setState({value: ""});
+    GoogleAnalytics.event({
+      category: 'Navigation',
+      action: 'Selected Top Changes Row',
+      label: selection
+    });
+  
   }
 
 }

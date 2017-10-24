@@ -3,7 +3,7 @@ import React from 'react';
 import qs from 'qs';
 import _ from 'lodash';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
-
+import GoogleAnalytics from 'react-ga';
 
 class RankingsTable  extends React.Component {
    state = {
@@ -54,9 +54,11 @@ class RankingsTable  extends React.Component {
   rowSelected = (rowIndex) => {
     if(!_.isUndefined(rowIndex)){
       this.applyQuery(this.props.tags[rowIndex].tag);
+      
     }
   };
-
+  
+  
   applyQuery = (selection) =>{
     let oldQuery = this.props.location.search;
     oldQuery = qs.parse(oldQuery.substring(1));
@@ -67,6 +69,11 @@ class RankingsTable  extends React.Component {
     let newQueryPayload = { "keywords": payload.join() };
     this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: true }));
     this.setState({value: ""});
+    GoogleAnalytics.event({
+      category: 'Navigation',
+      action: 'Selected Rankings Row',
+      label: selection
+    });
   }
 
 }
