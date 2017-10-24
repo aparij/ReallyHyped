@@ -91,7 +91,7 @@ class App extends Component {
         <h1>StackOverflow Careers Tech Trends</h1>
 
         <h3>
-          The data provided was retrieved from - <a target="_blank" href="https://stackoverflow.com/jobs"> StackOveflow Careers</a><br/>
+          The data provided was retrieved from - <a target="_blank" href="https://stackoverflow.com/jobs"> StackOverflow Careers</a><br/>
         </h3>
         <p>
           The data is only for the limited five tags that employers select to show the main technologies.
