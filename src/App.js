@@ -93,6 +93,9 @@ class App extends Component {
         <h3>
           The data provided was retrieved from - <a target="_blank" href="https://stackoverflow.com/jobs"> StackOverflow Careers</a><br/>
         </h3>
+
+
+
         <p>
           The data is only for the limited five tags that employers select to show the main technologies.
           It doesn't include the endless "nice to have" list of buzz words that many job posts uncesssary add.
@@ -132,10 +135,10 @@ class App extends Component {
            location={this.props.location}
         />
         <div className="footer">
-
-          <div>Open source on <a target="_blank" href="https://github.com/aparij/ThrillIsGoneLab">Github</a> </div>
-          <div>Original data <a target="_blank" href="https://github.com/aparij/soCareers-Data">Github</a> </div>
-          <div>Scraping script source <a target="_blank" href="https://github.com/aparij/soCareersScrape">Github</a> </div>
+          <div className="footer-element">Follow <a target="_blank" href="https://twitter.com/alex_parij">@aparij</a> </div>   
+          <div className="footer-element">Open source on <a target="_blank" href="https://github.com/aparij/ThrillIsGoneLab">Github</a> </div>
+          <div className="footer-element">Original data <a target="_blank" href="https://github.com/aparij/soCareers-Data">Github</a> </div>
+          <div className="footer-element">Scraping script source <a target="_blank" href="https://github.com/aparij/soCareersScrape">Github</a> </div>
         </div>
       </div>
     );

@@ -5,6 +5,12 @@
  font-size:small;
  background-color: #E1F5FE;
  padding: 30px;
+ display: flex;
+ flex-flow: row;
+
+}
+.footer-element{
+    margin: 10px;
 }
 
 .plot{
@@ -27,6 +33,7 @@
 .suggest-input-row{
   display: flex;
   flex-flow: row;
+  
 }
 
 .buttons-container{
