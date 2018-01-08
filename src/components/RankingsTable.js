@@ -42,10 +42,10 @@ class RankingsTable  extends React.Component {
 
   renderRows(){
     let rows = this.props.tags.map((v,index)=>
-      <TableRow onClick={(event)=>this.rowSelected(index)} key={"row-"+v.rank} className="table-row">
-        <TableCell className="table-column table-column__rank table-pointer" key={"cell-rank-"+v.rank}>{v.rank}</TableCell>
-        <TableCell className="table-column table-pointer" key={"cell-tag-"+v.tag}>{v.tag}</TableCell>
-        <TableCell className="table-column table-pointer" key={"cell-perc-"+index}> {v.perc} %</TableCell>
+      <TableRow onClick={(event)=>this.rowSelected(index)} key={"row-"+v.value.rank} className="table-row">
+        <TableCell className="table-column table-column__rank table-pointer" key={"cell-rank-"+v.value.rank}>{v.value.rank}</TableCell>
+        <TableCell className="table-column table-pointer" key={"cell-tag-"+v.name}>{v.name}</TableCell>
+        <TableCell className="table-column table-pointer" key={"cell-perc-"+index}> {v.value.perc} %</TableCell>
       </TableRow>
     )
     return (rows);
@@ -53,7 +53,7 @@ class RankingsTable  extends React.Component {
 
   rowSelected = (rowIndex) => {
     if(!_.isUndefined(rowIndex)){
-      this.applyQuery(this.props.tags[rowIndex].tag);
+      this.applyQuery(this.props.tags[rowIndex].name);
       
     }
   };
