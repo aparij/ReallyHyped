@@ -29,9 +29,14 @@ export default class SelectionTags extends React.Component {
      let oldQuery = this.props.location.search;
      oldQuery = qs.parse(oldQuery.substring(1));
      let payload = oldQuery["keywords"].split(",").filter(item => item!==keyword)
-     let newQueryPayload = { "keywords": payload.join() };
-     let path = this.props.location.pathname;
-     this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: true }));
+     if(payload){
+       let newQueryPayload = { "keywords": payload.join() };
+       let path = this.props.location.pathname;
+       this.props.history.push("?"+qs.stringify(newQueryPayload,{ encode: true }));
+
+     }else{
+      this.props.history.push("");
+     }
    };
 
    renderChip(data,index) {
@@ -46,6 +51,8 @@ export default class SelectionTags extends React.Component {
    }
 
    render() {
+     console.log('file:SelectionTags.js , line:53',this.props.tags);
+     
      if(_.isEmpty(this.props.tags)){
        return null;
      }

@@ -13,11 +13,13 @@ const style = {
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = (value,suggestionsArr) => {
+  console.log('file:Suggest.js , line:15',value,suggestionsArr);
+  
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
   return inputLength === 0 ? [] : suggestionsArr.filter(lang =>
-    lang.text.toLowerCase().slice(0, inputLength) === inputValue
+    lang.toLowerCase().slice(0, inputLength) === inputValue
   );
 };
 
@@ -27,12 +29,16 @@ const getSuggestions = (value,suggestionsArr) => {
 // When suggestion is clicked, Autosuggest needs to populate the input element
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.text;
+const getSuggestionValue = suggestion => {
+  console.log('file:Suggest.js , line:32',suggestion);
+  
+  return suggestion
+};
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>
-    {suggestion.text}
+    {suggestion}
   </div>
 );
 
