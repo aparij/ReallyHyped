@@ -45,7 +45,7 @@ class App extends Component {
                    //mode: 'cors',
                    cache: 'default' };
 
-    fetch('http://localhost:3001/tags' + query) // Call the fetch function passing the url of the API as a parameter
+    fetch('/tags' + query) // Call the fetch function passing the url of the API as a parameter
     .then((resp) => {
       return resp.json();
     }).then((data) => { 
@@ -66,7 +66,7 @@ class App extends Component {
                    //mode: 'cors',
                    cache: 'default' };
 
-    fetch('http://localhost:3001/suggestions') // Call the fetch function passing the url of the API as a parameter
+    fetch('/suggestions') // Call the fetch function passing the url of the API as a parameter
     .then((resp) => {
       return resp.json();
     }).then((data) => { 
