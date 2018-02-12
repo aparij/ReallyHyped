@@ -90,8 +90,6 @@ class App extends Component {
     let chartData = []
     console.log(this.state.data)
     for(let tag of Object.keys(this.state.data)){
-      
-      console.log('file:App.js , line:110',tag);
       if(this.state.data[tag]){
         let chartTagObj = {x:[],y:[],type: 'scatter',name: tag};
         for(let dataPoint of this.state.data[tag]){
